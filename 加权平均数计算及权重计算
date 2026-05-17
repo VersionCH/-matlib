@@ -1,0 +1,22 @@
+%算数平均法
+A =input("判断矩阵A=");
+SUMA =sum(A,1);
+[n,n] =size(A);
+Ar=repmat(SUMA,n,1);
+Stand_A=A./Ar;
+SUMAR =sum(Stand_A,2);
+a=SUMAR/n;
+
+%几何平均法
+PROD_A= prod(A,2);
+PROD_n_A=PROD_A.^(1/n);
+b=PROD_n_A/sum(PROD_n_A);
+
+%特征值计算权重
+[V,D]=eig(A);
+MAX=max(max(D));
+[r,c]=find(MAX == D,1);
+f=V(:,c)./sum(V(:,c));
+
+%三者平均权重
+disp((a+b+f)/3);
